@@ -1,0 +1,36 @@
+h1 {
+    font-size: 50px;
+}
+
+.objectpagecontainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.objectpage, .objectpagecomment {
+    flex: 1;
+    padding: 20px;
+}
+
+.input {
+    width: 700px;
+    height: 100px;
+}
+
+
+h1{
+    color: red;
+}
+
+img{
+    width: 400px;
+    height: 500px;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.buttoncontainer{
+    text-align: center;
+}

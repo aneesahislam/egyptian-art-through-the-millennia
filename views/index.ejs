@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <title>Egyptian Art Through the Millennia</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="img/style.css">
+</head>
+<body>
+
+<br>
+    <div class="headercontainer">
+        <img class="artisans" src="img/artisans.jpg" alt="Egyptian Artisans: Tomb of Nebamun and Ipuky">
+        <div class="overlaytext">Egyptian Art Through The Millennia</div>
+    </div>
+
+    <br>
+
+    <div class="container">
+    <div class="login">
+    <p>Create an Account Today</p>
+        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span>Login</a>
+        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span>Signup</a>
+    </div>
+
+    <br>
+        <% for(let i = 0; i < art.length; i++){ %>
+            <a href="/object/<%= art[i].objectID %>"><img src= "<%= art[i].primaryImageSmall %>" class="art"></a>
+        <% } %>
+    </div>
+
+    <br>
+
+</div>
+</body>
+</html>
