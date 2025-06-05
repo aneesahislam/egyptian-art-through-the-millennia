@@ -1,13 +1,8 @@
-## Installation
+## Egyptian Art Through the Millennia
 
-1. Clone repo
-2. run `npm install`
+<p>This website aims to explore the rich artistic traditions of ancient Egypt while also providing a platform for users to engage with one another (in early development).</p>
 
-## Usage
+![project2-1](https://github.com/user-attachments/assets/2709e407-f611-4426-ada0-b87465c7cdb0)
 
-1. run `node server.js`
-2. Navigate to `localhost:8080`
+![project2-2](https://github.com/user-attachments/assets/5dbf4a2a-2ca3-4d73-90ed-fbf2df0e02ca)
 
-## Credit
-
-Modified from Scotch.io's auth tutorial
