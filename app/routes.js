@@ -4,16 +4,22 @@ module.exports = function (app, passport, db) {
   // normal routes ===============================================================
 
   // shown on the home page (will also have our login links)
-  app.get('/', function (req, res) {
-    axios.get('https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=10')
+
+app.get('/', function (req, res) {
+  res.render('index')
+});
+  
+  app.get('/shabtis', function (req, res) {
+    axios.get('https://collectionapi.metmuseum.org/public/collection/v1/search?departmentIds=10&hasImages=true&q="Heart Scarab"')
       .then(response => {
-        //console.log(response)
+        // console.log(response)
         const requests = response.data.objectIDs.slice(0, 48).map(objectID => axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`));
         axios.all (requests).then(axios.spread((...responses) => {
-          //console.log(responses)
+          // console.log(responses)
           const result = responses.map (response => response.data)
-          //console.log(result)
-          res.render('index.ejs', { art: result });
+
+          console.log(result)
+          res.render('shabtis.ejs', { art: result });
         }))
       })
       .catch(error => console.error('Axios error:', error))
@@ -32,10 +38,47 @@ module.exports = function (app, passport, db) {
         });
       })
       .catch(error => {
-        console.error('Error fetching art object:', error);
-        res.status(500).send('Error fetching art object');
+        console.error('Connection lost to external server, please try again', error);
+        res.status(500).send('Connection lost to external server, please try again');
       });
   });
+
+
+  app.get('/jewerly', function (req, res) {
+    axios.get('https://collectionapi.metmuseum.org/public/collection/v1/search?departmentIds=10&hasImages=true&q="necklace"')
+      .then(response => {
+        // console.log(response)
+        const requests = response.data.objectIDs.slice(0, 48).map(objectID => axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`));
+        axios.all (requests).then(axios.spread((...responses) => {
+          // console.log(responses)
+          const result = responses.map (response => response.data)
+
+          console.log(result)
+          res.render('jewerly.ejs', { art: result });
+        }))
+      })
+      .catch(error => console.error('Axios error:', error))
+  });
+
+  app.get('/object/:objectID', function (req, res) {
+    axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${req.params.objectID}`)
+      .then(response => {
+        // Fetch comments for this art object
+        db.collection('art').find({ objectID: req.params.objectID }).toArray((err, comments) => {
+          if (err) return console.log(err);
+          res.render('object.ejs', { 
+            art: response.data,
+            comments: comments || []
+          });
+        });
+      })
+      .catch(error => {
+        console.error('Connection lost to external server, please try again', error);
+        res.status(500).send('Connection lost to external server, please try again');
+      });
+  }); 
+
+
 
   // PROFILE SECTION =========================
   app.get('/profile', isLoggedIn, function (req, res) {
