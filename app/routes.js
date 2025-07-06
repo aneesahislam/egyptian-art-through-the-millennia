@@ -10,7 +10,7 @@ app.get('/', function (req, res) {
 });
   
   app.get('/shabtis', function (req, res) {
-    axios.get('https://collectionapi.metmuseum.org/public/collection/v1/search?departmentIds=10&hasImages=true&q="Heart Scarab"')
+    axios.get('https://collectionapi.metmuseum.org/public/collection/v1/search?departmentIds=10&hasImages=true&q="Amarna"')
       .then(response => {
         // console.log(response)
         const requests = response.data.objectIDs.slice(0, 48).map(objectID => axios.get(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`));
